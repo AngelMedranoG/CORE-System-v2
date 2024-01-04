@@ -1,0 +1,17 @@
+[data-bs-theme=light]{
+    .show_light{ 
+        display: block;
+    }
+    .show_dark{
+        display: none;
+    }
+}
+
+[data-bs-theme=dark]{
+    .show_light{ 
+        display: none;
+    }
+    .show_dark{
+        display: block;
+    }
+}
