@@ -25,19 +25,19 @@
 
         <div id="kt_table_routes_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
             <div class="table-responsive">
-                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_table_routes">
+                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_table">
                     <thead>
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table_routes" aria-label="Nombre del administrador">
+                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Nombre de la categoría">
                                 Nombre
                             </th>
-                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table_routes" aria-label="Cantidad de trayectos">
+                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Nombre corto de la categoría">
                                 Nombre corto
                             </th>
-                            <th tabindex="0" aria-controls="kt_table_routes" aria-label="Cantidad de trayectos">
+                            <th tabindex="0" aria-controls="kt_table" aria-label="¿Se muestra en bot?">
                                 ¿Se muestra en bot?
                             </th>
-                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table_routes" aria-label="Fecha de registro">
+                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Fecha de registro">
                                 Fecha de registro
                             </th>
                             <th class="text-end pe-3 min-w-100px" aria-label="Acciones">

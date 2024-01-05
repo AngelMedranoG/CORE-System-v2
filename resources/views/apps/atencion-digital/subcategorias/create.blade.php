@@ -50,6 +50,6 @@
 
 @section('content')
 
-    @livewire('apps.a-d.subcategorias.subcategorias-create')
+    @livewire('apps.a-d.subcategorias.subcategorias-create', ['categoria' => $categoria])
 
 @endsection

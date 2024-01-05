@@ -45,6 +45,7 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
 
             Route::get('/create', [App\Http\Controllers\AD\SubcategoriasController::class, 'create'])->name('create');
 
+            Route::get('/{subcategoriaId}/edit', [App\Http\Controllers\AD\SubcategoriasController::class, 'create'])->name('create');
         });
 
 

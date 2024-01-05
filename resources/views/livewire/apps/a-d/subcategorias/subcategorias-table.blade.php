@@ -31,6 +31,9 @@
                             <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Nombre de la subcategoría">
                                 Nombre
                             </th>
+                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Tiempo máximo de respuesta en horas">
+                                Tiempo máximo de respuesta
+                            </th>
                             <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Fecha de registro">
                                 Fecha de registro
                             </th>
@@ -45,6 +48,7 @@
 
                             <tr>
                                 <td>{{ $subcategoria->nombre }}</td>
+                                <td>{{ $subcategoria->tiempo_respuesta }} horas</td>
                                 <td>{{ $subcategoria->getCreatedAtFormatted() }}</td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -81,7 +85,7 @@
 
                         @empty
                             <tr>
-                                <td valign="top" colspan="5" class="dataTables_empty text-center">No se han encontrado registros</td>
+                                <td valign="top" colspan="4" class="dataTables_empty text-center">No se han encontrado registros</td>
                             </tr>
                         @endforelse
                             

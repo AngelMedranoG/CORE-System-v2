@@ -11,11 +11,12 @@ class WhatsAppController extends Controller
     public function verifyToken(Request $request){
         try{
 
-            $token = $request->query();
-            Log::info('Lo que llega de WhatsApp: ' . json_encode($token));
-            return response()->json(['status' => 'error'], 400);
-            env('WHATSAPP_TOKEN');
+            if($request->hub_challenge != null && $request->hub_verify_token != null && $request->hub_verify_token ==  env('WHATSAPP_TOKEN')){
+                return response($request->hub_challenge);
+            }
 
+            return response()->json(['status' => 'error'], 400);
+           
         }catch(\Exception $e){
             Log::error('ocurrio un verificar el token de WhatsApp: ' . $e->getMessage());
             return response()->json(['status' => 'error','errors' => $e->getMessage()], 400);
@@ -23,6 +24,13 @@ class WhatsAppController extends Controller
     }
 
     public function receivedMessage(Request $request){
-
+		Log::info('recibiendo mensaje');
+		try{
+			Log::info('Mensaje Recibido: ' . json_encode($request->all()));
+			return response("EVENT_RECEIVED");
+		}catch(\Exception $e){
+            Log::error('ocurrio un error al recibir el WhatsApp: ' . $e->getMessage());
+			return response("EVENT_RECEIVED");
+        }
     }
 }
