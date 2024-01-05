@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use function Ramsey\Uuid\v1;
@@ -23,15 +24,33 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
 
-Route::prefix('sistema')->middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function () {
 
-     //Asistencia Digital 
-     Route::prefix('atencion-digital')->group(function () {
-        //Route::resource('clientes', App\Http\Controllers\ClientesController::class)->names('clientes');
+    //Asistencia Digital 
+    Route::prefix('atencion-digital')->name('atencion-digital.')->group(function () {
+
+        Route::get('/', [App\Http\Controllers\AD\DashboardController::class, 'index'])->name('index');
+
+        Route::resource('categorias', App\Http\Controllers\AD\CategoriasController::class, ['except' => ['store', 'update', 'destroy']])->names('categorias');
+
+        Route::prefix('categorias/{categoriaId}/subcategorias')->name('subcategorias.')->group(function() {
+
+            Route::get('/', [App\Http\Controllers\AD\SubcategoriasController::class, 'index'])->name('index');
+
+            Route::get('/create', [App\Http\Controllers\AD\SubcategoriasController::class, 'create'])->name('create');
+
+        });
+
+
+        //whatsapp
+        Route::prefix('whatsapp')->name('whatsapp.')->group(function() {
+            Route::get('/', [App\Http\Controllers\AD\WhatsAppController::class, 'verifyToken'])->name('verifyToken');
+            Route::post('/', [App\Http\Controllers\AD\WhatsAppController::class, 'receivedMessage'])->name('receivedMessage');
+        }); 
     });
 
-     //Expediente Digital 
-     Route::prefix('gestion-ciudadana')->group(function () {
+    //Expediente Digital 
+    Route::prefix('gestion-ciudadana')->group(function () {
         //Route::resource('clientes', App\Http\Controllers\ClientesController::class)->names('clientes');
     });
 
@@ -44,6 +63,5 @@ Route::prefix('sistema')->middleware(['auth'])->group(function () {
     Route::prefix('encuestas')->group(function () {
         //Route::resource('clientes', App\Http\Controllers\ClientesController::class)->names('clientes');
     });
-
 
 });
