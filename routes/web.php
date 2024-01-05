@@ -20,6 +20,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+//whatsapp
+Route::prefix('whatsapp/api')->name('whatsapp.')->group(function() {
+    Route::get('/', [App\Http\Controllers\AD\WhatsAppController::class, 'verifyToken'])->name('verifyToken');
+    Route::post('/', [App\Http\Controllers\AD\WhatsAppController::class, 'receivedMessage'])->name('receivedMessage');
+}); 
+
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'verified']);
@@ -42,11 +48,7 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
         });
 
 
-        //whatsapp
-        Route::prefix('whatsapp')->name('whatsapp.')->group(function() {
-            Route::get('/', [App\Http\Controllers\AD\WhatsAppController::class, 'verifyToken'])->name('verifyToken');
-            Route::post('/', [App\Http\Controllers\AD\WhatsAppController::class, 'receivedMessage'])->name('receivedMessage');
-        }); 
+      
     });
 
     //Expediente Digital 
