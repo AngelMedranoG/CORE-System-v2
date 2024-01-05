@@ -12,9 +12,10 @@ class WhatsAppController extends Controller
         try{
 
           if($request->hub_challenge != null && $request->hub_verify_token != null && $request->hub_verify_token ==  env('WHATSAPP_TOKEN')){
-                 return response($request->hub_challenge);
+            Log::info('token WhatsApp verificado');     
+            return response($request->hub_challenge);
             }
-
+            Log::error('token WhatsApp NO verificado');
             return response()->json(['status' => 'error'], 400);
 
         }catch(\Exception $e){
@@ -24,7 +25,7 @@ class WhatsAppController extends Controller
     }
 
     public function receivedMessage(Request $request){
-		Log::info('Mensaje');
+		Log::info('recibiendo mensajes');
 		try{
 			Log::info('Mensaje Recibido: ' . json_encode($request->all()));
 			return response("EVENT_RECEIVED");

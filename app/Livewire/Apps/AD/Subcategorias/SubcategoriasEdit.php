@@ -3,6 +3,7 @@
 namespace App\Livewire\Apps\AD\Subcategorias;
 
 use App\Models\AdCategorias;
+use App\Models\AdSubCategorias;
 use Exception;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -11,6 +12,9 @@ class SubcategoriasEdit extends Component {
 
     #[Locked]
     public AdCategorias $categoria;
+
+    #[Locked]
+    public AdSubCategorias $subcategoria;
 
     public $nombre, $tiempoRespuesta;
 
@@ -23,20 +27,23 @@ class SubcategoriasEdit extends Component {
         'tiempoRespuesta' => 'tiempo máximo de respuesta',
     ];
 
-    public function mount(AdCategorias $categoria) {
+    public function mount(AdCategorias $categoria, AdSubCategorias $subcategoria) {
         $this->categoria = $categoria;
+        $this->subcategoria = $subcategoria;
+
+        $this->nombre = $subcategoria->nombre;
+        $this->tiempoRespuesta = $subcategoria->tiempo_respuesta;
     }
 
     public function submit() {
 
-        $this->validate($this->rules, [], );
+        $this->validate($this->rules, [], $this->validationAttributes);
 
         try {
             
-            $data = new AdSubcategorias();
+            $data = $this->subcategoria;
             $data->nombre           = $this->nombre;
             $data->tiempo_respuesta = $this->tiempoRespuesta;
-            $data->categoria_id     = $this->categoria->id;
             $data->save();
 
             toastr()->success('La subcategoría ha sido editada correctamente.', 'Subcategorías', ["positionClass" => "toast-top-right"]);
