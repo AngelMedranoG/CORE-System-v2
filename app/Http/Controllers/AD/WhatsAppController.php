@@ -12,7 +12,7 @@ class WhatsAppController extends Controller
         try{
 
             $token = $request->query();
-            Log::info('Lo que llega de WhatsApp: ' . $token);
+            Log::info('Lo que llega de WhatsApp: ' . json_encode($token));
             return response()->json(['status' => 'error'], 400);
             env('WHATSAPP_TOKEN');
 
