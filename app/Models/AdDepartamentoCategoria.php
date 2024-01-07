@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AdDepartamentoCategoria extends Model
-{
+class AdDepartamentoCategoria extends Model {
+
     use HasFactory;
+
+    public $timestamps = false;
+    
 }

@@ -2,10 +2,23 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AdDepartamentos extends Model
-{
-    use HasFactory;
+class AdDepartamentos extends Model {
+
+    use HasFactory, SoftDeletes;
+
+    public function getCreatedAtFormatted() {
+        
+        return Carbon::parse($this->created_at)->format('d/m/Y H:i');
+    }
+
+    public function categorias() {
+
+        return $this->belongsToMany(AdCategorias::class, 'ad_departamento_categorias', 'departamento_id', 'categoria_id',);
+    }
+
 }

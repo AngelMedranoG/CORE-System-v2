@@ -53,6 +53,9 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
       
         // Canales
         Route::resource('canales', App\Http\Controllers\AD\CanalesController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('canales');
+      
+        // Departamentos
+        Route::resource('departamentos', App\Http\Controllers\AD\DepartamentosController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('departamentos');
 
     });
 

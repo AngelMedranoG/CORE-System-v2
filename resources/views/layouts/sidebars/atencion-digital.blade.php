@@ -41,7 +41,7 @@
 
 
 <div class="menu-item ">
-    <a @class(['menu-link', 'active' => $routeName === 'sistema.atencion-digital'])
+    <a @class(['menu-link', 'active' => $routeName === 'sistema.atencion-digital.agentes'])
         href="#">
         <span class="menu-icon">
             <i class="ki-duotone ki-security-user fs-2">
@@ -54,8 +54,8 @@
 </div>
 
 <div class="menu-item ">
-    <a @class(['menu-link', 'active' => $routeName === 'sistema.atencion-digital'])
-        href="#">
+    <a @class(['menu-link', 'active' => ($routeName === 'sistema.atencion-digital.departamentos.index' || $routeName === 'sistema.atencion-digital.departamentos.create' || $routeName === 'sistema.atencion-digital.departamentos.edit')])
+        href="{{ route('sistema.atencion-digital.departamentos.index') }}">
         <span class="menu-icon">
             <i class="ki-duotone ki-element-equal fs-2">
                 <span class="path1"></span>
@@ -70,7 +70,7 @@
 </div>
 
 <div class="menu-item ">
-    <a @class(['menu-link', 'active' => $routeName === 'sistema.atencion-digital'])
+    <a @class(['menu-link', 'active' => $routeName === 'sistema.atencion-digital.ciudadanos'])
         href="#">
         <span class="menu-icon">
             <i class="ki-duotone ki-people fs-2">
