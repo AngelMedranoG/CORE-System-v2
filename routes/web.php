@@ -51,6 +51,9 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
         // Colonias
         Route::resource('colonias', App\Http\Controllers\AD\ColoniasController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('colonias');
       
+        // Canales
+        Route::resource('canales', App\Http\Controllers\AD\CanalesController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('canales');
+
     });
 
     //Expediente Digital 

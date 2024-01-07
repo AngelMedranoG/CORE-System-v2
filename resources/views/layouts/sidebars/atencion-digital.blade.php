@@ -86,7 +86,15 @@
 </div>
 
 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-    <span class="menu-link">
+    <span @class([
+        'menu-link', 
+        'active' => (
+            str_contains($routeName, 'atencion-digital.canales') 
+            || str_contains($routeName, 'atencion-digital.categorias') 
+            || str_contains($routeName, 'atencion-digital.subcategorias') 
+            || str_contains($routeName, 'atencion-digital.colonias')
+            || str_contains($routeName, 'atencion-digital.estatus'))
+        ])>
         <span class="menu-icon">
             <i class="ki-duotone ki-notepad fs-2">
                 <span class="path1"></span>
@@ -100,6 +108,14 @@
         <span class="menu-arrow"></span>
     </span>
     <div class="menu-sub menu-sub-accordion" style="display: none; overflow: hidden;" kt-hidden-height="125">
+        <div class="menu-item">
+            <a class="menu-link" href="{{ route('sistema.atencion-digital.canales.index') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Canales</span>
+            </a>
+        </div>
         <div class="menu-item">
             <a class="menu-link" href="{{ route('sistema.atencion-digital.categorias.index') }}">
                 <span class="menu-bullet">

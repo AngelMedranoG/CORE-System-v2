@@ -6,7 +6,7 @@
                 <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
                     <span class="path1"></span><span class="path2"></span>
                 </i> 
-                <input type="text" wire:model.live="search" class="form-control form-control-solid w-250px ps-13" placeholder="Buscar colonia">
+                <input type="text" wire:model.live="search" class="form-control form-control-solid w-250px ps-13" placeholder="Buscar canal">
             </div>
         </div>
 
@@ -28,11 +28,8 @@
                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer" id="kt_table">
                     <thead>
                         <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Nombre de la colonia">
+                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Nombre del canal">
                                 Nombre
-                            </th>
-                            <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Código postal">
-                                Código postal
                             </th>
                             <th class="min-w-125px" tabindex="0" aria-controls="kt_table" aria-label="Fecha de registro">
                                 Fecha de registro
@@ -44,12 +41,11 @@
                     </thead>
                     <tbody class="text-gray-600 fw-semibold">
 
-                        @forelse ($colonias as $colonia)
+                        @forelse ($canales as $canal)
 
                             <tr>
-                                <td>{{ $colonia->nombre }}</td>
-                                <td>{{ $colonia->codigo_postal }}</td>
-                                <td>{{ $colonia->getCreatedAtFormatted() }}</td>
+                                <td>{{ $canal->nombre }}</td>
+                                <td>{{ $canal->getCreatedAtFormatted() }}</td>
                                 <td class="text-end">
                                     <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                                         Acciones
@@ -57,7 +53,7 @@
                                     {{-- begin::Menu --}}
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-150px py-4" data-kt-menu="true">  
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('sistema.atencion-digital.colonias.edit', $colonia->id) }}" class="menu-link px-3">
+                                            <a href="{{ route('sistema.atencion-digital.canales.edit', $canal->id) }}" class="menu-link px-3">
                                                 <i class="ki-duotone ki-pencil fs-5 me-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -66,7 +62,7 @@
                                             </a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a href="#" wire:click="$dispatch('dataDelete', {{ $colonia->id }})" class="menu-link px-3">
+                                            <a href="#" wire:click="$dispatch('dataDelete', {{ $canal->id }})" class="menu-link px-3">
                                                 <i class="ki-duotone ki-trash fs-5 me-2">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
@@ -84,7 +80,7 @@
 
                         @empty
                             <tr>
-                                <td valign="top" colspan="4" class="dataTables_empty text-center">No se han encontrado registros</td>
+                                <td valign="top" colspan="3" class="dataTables_empty text-center">No se han encontrado registros</td>
                             </tr>
                         @endforelse
                             
@@ -94,8 +90,8 @@
 
             <div class="pt-4 row justify-content-end">
                 <div class="col-sm-12">
-                    @if(count($colonias) > 0)
-                        {{ $colonias->links() }}
+                    @if(count($canales) > 0)
+                        {{ $canales->links() }}
                     @endif
                 </div>
             </div>
@@ -124,10 +120,10 @@
                 }).then((result) => {
 
                     if (result.isConfirmed) {
-                        Livewire.dispatch('deleteColonia', {coloniaId: dataID});
+                        Livewire.dispatch('deleteCanal', {canalId: dataID});
                         
                         Swal.fire({
-                            title: "Colonia eliminada correctamente",
+                            title: "Canal eliminado correctamente",
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "Continuar",
