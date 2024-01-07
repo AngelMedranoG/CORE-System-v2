@@ -57,6 +57,9 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
         // Departamentos
         Route::resource('departamentos', App\Http\Controllers\AD\DepartamentosController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('departamentos');
 
+        // Ciudadanos
+        Route::get('ciudadanos', [App\Http\Controllers\AD\CiudadanosController::class, 'index'])->name('ciudadanos.index');
+
     });
 
     //Expediente Digital 

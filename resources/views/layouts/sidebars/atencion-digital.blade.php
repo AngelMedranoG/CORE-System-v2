@@ -70,8 +70,8 @@
 </div>
 
 <div class="menu-item ">
-    <a @class(['menu-link', 'active' => $routeName === 'sistema.atencion-digital.ciudadanos'])
-        href="#">
+    <a @class(['menu-link', 'active' => $routeName === 'sistema.atencion-digital.ciudadanos.index'])
+        href="{{ route('sistema.atencion-digital.ciudadanos.index') }}">
         <span class="menu-icon">
             <i class="ki-duotone ki-people fs-2">
                 <span class="path1"></span>
