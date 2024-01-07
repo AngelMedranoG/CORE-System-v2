@@ -120,7 +120,7 @@
         </div>
 
         <div class="menu-item">
-            <a class="menu-link" href="/metronic8/demo1/../demo1/apps/customers/getting-started.html">
+            <a class="menu-link" href="{{ route('sistema.atencion-digital.estatus.index') }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>

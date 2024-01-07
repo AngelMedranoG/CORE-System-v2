@@ -29,10 +29,13 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
     //Asistencia Digital 
     Route::prefix('atencion-digital')->name('atencion-digital.')->group(function () {
 
+        // Dashboard
         Route::get('/', [App\Http\Controllers\AD\DashboardController::class, 'index'])->name('index');
 
-        Route::resource('categorias', App\Http\Controllers\AD\CategoriasController::class, ['except' => ['store', 'update', 'destroy']])->names('categorias');
+        // Categorías
+        Route::resource('categorias', App\Http\Controllers\AD\CategoriasController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('categorias');
 
+        // Subcategorías
         Route::prefix('categorias/{categoriaId}/subcategorias')->name('subcategorias.')->group(function() {
 
             Route::get('/', [App\Http\Controllers\AD\SubcategoriasController::class, 'index'])->name('index');
@@ -42,6 +45,8 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
             Route::get('/{subcategoriaId}/edit', [App\Http\Controllers\AD\SubcategoriasController::class, 'edit'])->name('edit');
         });
 
+        // Estatus
+        Route::resource('estatus', App\Http\Controllers\AD\EstatusController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('estatus');
 
       
     });

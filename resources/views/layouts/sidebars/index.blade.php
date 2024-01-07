@@ -7,9 +7,13 @@
     data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
 
     <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
-        <a href="{{ route('home') }}">
-            <img alt="Logo" src="assets/media/logos/default-dark.svg" class="h-25px app-sidebar-logo-default" />
-            <img alt="Logo" src="assets/media/logos/default-small.svg" class="h-20px app-sidebar-logo-minimize" />
+        <a href="{{route('home')}}" class="show_light">
+            <img alt="Logo" src="{{asset('media/logos/need-black.png')}}" class="h-25px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{asset('media/logos/need-black.png')}}" class="h-20px app-sidebar-logo-minimize" />
+        </a>
+        <a href="{{route('home')}}" class="show_dark">
+            <img alt="Logo" src="{{asset('media/logos/need-white.png')}}" class="h-25px app-sidebar-logo-default" />
+            <img alt="Logo" src="{{asset('media/logos/need-white.png')}}" class="h-20px app-sidebar-logo-minimize" />
         </a>
         <div id="kt_app_sidebar_toggle"
             class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
