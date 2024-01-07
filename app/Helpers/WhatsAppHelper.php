@@ -2,7 +2,13 @@
 
 namespace App\Helpers;
 
+use Exception;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+
 class WhatsAppHelper {
+
+    protected static $messagesUrl = 'https://graph.facebook.com/v17.0/228915206960808/messages';
 
     /**
      * Se utiliza para enviar un texto
@@ -13,18 +19,35 @@ class WhatsAppHelper {
      * 
      * @return string  tipo JSON
      */
-    static function buildText($phone, $text, $previewUrl = false) {
+    static function sendText($phone, $text, $previewUrl = false) {
+        
+        try {
 
-        return json_encode([
-            "messaging_product" => "whatsapp",
-            "preview_url"       => $previewUrl,
-            "recipient_type"    => "individual",
-            "to"                => $phone,
-            "type"              => "text",
-            "text"              => [
-                "body" => $text
-            ],
-        ]);
+            $response = Http::withHeaders([
+                'Content-Type' => 'aplication/json',
+                'Authorization' => 'Bearer ' . env('WHATSAPP_API_TOKEN'),
+            ])
+            ->post(static::$messagesUrl, [
+                "messaging_product" => "whatsapp",
+                "preview_url"       => $previewUrl,
+                "recipient_type"    => "individual",
+                "to"                => $phone,
+                "type"              => "text",
+                "text"              => [
+                    "body" => $text
+                ],
+            ]);
+            
+    
+            if($response->status() != 200) {
+
+                Log::alert('[WHATSAPP HELPER] Ha ocurrido un error al intentar enviar un mensaje de texto. Status: ' . $response->status() . '. Body: ' . json_encode($response->body()));
+            }
+        }
+        catch(Exception	$exception) {
+            
+            Log::error('[WHATSAPP HELPER] Ha ocurrido un error al intentar enviar un mensaje de texto. ' . $exception->getMessage());
+        }
     }
 
       /**
@@ -39,32 +62,57 @@ class WhatsAppHelper {
      * 
      * @return string  tipo JSON
      */
-    static function buildList($phone, $sections, $bodyText, $btnText, $headerText = "", $footerText = "") {
-       
-        return json_encode([
-            "messaging_product" => "whatsapp",
-            "preview_url"       => false,
-            "recipient_type"    => "individual",
-            "to"                => $phone,
-            "type"              => "interactive",
-            "interactive"       => [
-                "type"      => "list",
-                "header"    => [
-                    "type"  => "text",
-                    "text"  => $headerText
+    static function sendList($phone, $sections, $bodyText, $btnText, $headerText = "", $footerText = "") {
+        
+        try {
+
+            $response = Http::withHeaders([
+                'Content-Type' => 'aplication/json',
+                'Authorization' => 'Bearer ' . env('WHATSAPP_API_TOKEN'),
+            ])
+            ->post(static::$messagesUrl, [
+                "messaging_product" => "whatsapp",
+                "preview_url"       => false,
+                "recipient_type"    => "individual",
+                "to"                => $phone,
+                "type"              => "interactive",
+                "interactive"       => [
+                    "type"      => "list",
+                    "header"    => [
+                        "type"  => "text",
+                        "text"  => $headerText
+                    ],
+                    "body"    => [
+                        "text"  => $bodyText
+                    ],
+                    "footer"    => [
+                        "text"  => $footerText
+                    ],
+                    "action" => [
+                        "button"    => $btnText,
+                        "sections"  => $sections,
+                    ],
                 ],
-                "body"    => [
-                    "text"  => $bodyText
-                ],
-                "footer"    => [
-                    "text"  => $footerText
-                ],
-                "action" => [
-                    "button"    => $btnText,
-                    "sections"  => $sections,
-                ],
-            ],
-        ]);
+            ]);
+            
+    
+            if($response->status() != 200) {
+
+                Log::alert('[WHATSAPP HELPER] Ha ocurrido un error al intentar enviar una lista. Status: ' . $response->status() . '. Body: ' . json_encode($response->body()));
+            }
+        }
+        catch(Exception	$exception) {
+            
+            Log::error('[WHATSAPP HELPER] Ha ocurrido un error al intentar enviar una lista. ' . $exception->getMessage());
+        }
+    }
+
+    static function buildListSectionOption($optionId, $title, $description = "") {
+        return [
+            "id"          => $optionId,
+            "title"       => $title,
+            "description" => $description,
+        ];
     }
 
      /**
