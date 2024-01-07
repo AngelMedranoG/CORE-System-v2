@@ -100,25 +100,22 @@
         <span class="menu-arrow"></span>
     </span>
     <div class="menu-sub menu-sub-accordion" style="display: none; overflow: hidden;" kt-hidden-height="125">
-
-    <div class="menu-item">
-        <a class="menu-link" href="{{ route('sistema.atencion-digital.categorias.index') }}">
-            <span class="menu-bullet">
-                <span class="bullet bullet-dot"></span>
-            </span>
-            <span class="menu-title">Categorías</span>
-        </a>
-    </div>
-
         <div class="menu-item">
-            <a class="menu-link" href="/metronic8/demo1/../demo1/apps/customers/getting-started.html">
+            <a class="menu-link" href="{{ route('sistema.atencion-digital.categorias.index') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">Categorías</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a class="menu-link" href="{{ route('sistema.atencion-digital.colonias.index') }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
                 <span class="menu-title">Colonias</span>
             </a>
         </div>
-
         <div class="menu-item">
             <a class="menu-link" href="{{ route('sistema.atencion-digital.estatus.index') }}">
                 <span class="menu-bullet">
@@ -127,6 +124,5 @@
                 <span class="menu-title">Estatus</span>
             </a>
         </div>
-
     </div>
 </div>

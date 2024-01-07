@@ -48,6 +48,8 @@ Route::middleware(['auth'])->prefix('sistema')->name('sistema.')->group(function
         // Estatus
         Route::resource('estatus', App\Http\Controllers\AD\EstatusController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('estatus');
 
+        // Colonias
+        Route::resource('colonias', App\Http\Controllers\AD\ColoniasController::class, ['except' => ['show', 'store', 'update', 'destroy']])->names('colonias');
       
     });
 
